@@ -11,4 +11,5 @@ export interface ITodo {
 export type IState = {
   data: ITodo[];
   setData: Dispatch<SetStateAction<ITodo[]>>;
+  deleteTodo: (id: number) => void;
 };
