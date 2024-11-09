@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useState } from "react";
-import { IChildren, IState, ITodo } from "../types";
+import React, { useState } from "react";
+import { IChildren, ITodo } from "../types";
+import { AppContext } from "../hooks";
 
-export const AppContext = createContext<null | IState>(null);
 const GlobalContext: React.FC<IChildren> = ({ children }) => {
   const [data, setData] = useState<ITodo[]>([]);
   return (
@@ -12,7 +12,3 @@ const GlobalContext: React.FC<IChildren> = ({ children }) => {
 };
 
 export default GlobalContext;
-
-export const useAppContext = () => {
-  return useContext(AppContext);
-};
