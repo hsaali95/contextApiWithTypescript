@@ -12,7 +12,6 @@ const FormInputs = () => {
   };
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("formData", formData);
   };
   return (
     <>
