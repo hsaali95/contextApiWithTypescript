@@ -13,3 +13,7 @@ export type IState = {
   setData: Dispatch<SetStateAction<ITodo[]>>;
   deleteTodo: (id: number) => void;
 };
+export interface IForm {
+  myname?: string;
+  phone?: number | string;
+}
