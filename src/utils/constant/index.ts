@@ -3,6 +3,7 @@ import AboutPage from "../../pages/about-page";
 import Todo from "../../pages/todo";
 import InputFields from "../../pages/input-fields";
 import FormInputs from "../../pages/form-inputs";
+import ZodReactHookForm from "../../pages/form-with-zod-react-hook-form.tsx";
 export const list = [
   {
     path: "/",
@@ -23,5 +24,9 @@ export const list = [
   {
     path: "/form-inputs",
     element: FormInputs,
+  },
+  {
+    path: "/react-hook-form-with-zod-validate",
+    element: ZodReactHookForm,
   },
 ];
