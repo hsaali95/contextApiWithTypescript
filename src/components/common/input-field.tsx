@@ -4,7 +4,7 @@
 // interface InputFieldProps {
 //   type?: HTMLInputTypeAttribute;
 //   placeholder?: string;
-//   register: UseFormRegister<FieldValues>;
+//   register?: UseFormRegister<FieldValues>;
 //   error?: FieldError | undefined;
 //   label?: string;
 //   name?: string;
@@ -15,65 +15,53 @@
 //   placeholder,
 //   error,
 //   label,
-//   name,
-//   register,
+//   ...props
 // }: InputFieldProps) => {
+//   const register = props.register && props.register(props?.name || "");
+
 //   return (
 //     <>
 //       <label>{label}</label>
-//       <input
-//         placeholder={placeholder}
-//         type={type}
-//         name={name}
-//         {...register(name)}
-//       />
-//       {error && <span style={{ color: "red" }}>{error.message}</span>}
+//       <input placeholder={placeholder} type={type} {...register} />
+//       {props.errorMessage && (
+//         <span style={{ color: "red" }}>{props.errorMessage}</span>
+//       )}
 //     </>
 //   );
 // };
 
 // export default InputField;
+
 import { HTMLInputTypeAttribute } from "react";
-import {
-  FieldError,
-  FieldErrorsImpl,
-  FieldValues,
-  Merge,
-  UseFormRegister,
-} from "react-hook-form";
+import { FieldValues, UseFormRegister } from "react-hook-form";
 
 interface InputFieldProps {
   type?: HTMLInputTypeAttribute;
   placeholder?: string;
   register: UseFormRegister<FieldValues>;
-  error: FieldError | undefined | Merge<FieldError, FieldErrorsImpl<any>>;
+  name: string; // Make 'name' required for proper registration
+  errorMessage?: string;
   label?: string;
-  name: string;
 }
 
 const InputField = ({
-  type = "text", // Default type
+  type = "text",
   placeholder,
-  error,
   label,
-  name,
   register,
+  name,
+  errorMessage,
 }: InputFieldProps) => {
   return (
-    <>
+    <div>
       {label && <label>{label}</label>}
       <input
-        id={name}
-        placeholder={placeholder}
         type={type}
-        {...register(name)} // Pass register directly
+        placeholder={placeholder}
+        {...register(name)} // Properly register the field with its name
       />
-      {error && (
-        <span style={{ color: "red" }}>
-          {error.message || "Invalid input"}
-        </span>
-      )}
-    </>
+      {errorMessage && <span style={{ color: "red" }}>{errorMessage}</span>}
+    </div>
   );
 };
 
